@@ -72,7 +72,6 @@ export const fr: Record<string, string> = {
     "Quatorze projets. Données réelles. Impact réel.",
   "All": "Tous",
   "Business Intelligence": "Business Intelligence",
-  "Machine Learning": "Machine Learning",
   "Real-Time & Streaming": "Temps Réel & Streaming",
   "Statistical Analysis": "Analyse Statistique",
   "View Details": "Voir les détails",
