@@ -2,8 +2,10 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChapterHeading } from "../ChapterHeading";
 import { projects, projectCategories, type Project, type ProjectCategory } from "@/data/projects";
+import { useT } from "@/lib/i18n";
 
 export function Projects() {
+  const t = useT();
   const [filter, setFilter] = useState<"All" | ProjectCategory>("All");
   const [active, setActive] = useState<Project | null>(null);
 
@@ -16,11 +18,10 @@ export function Projects() {
     <section id="work" aria-labelledby="work-heading" className="px-6 py-24 md:px-16 md:py-32 lg:px-24">
       <ChapterHeading
         number="03"
-        kicker="Chapter Three"
-        title="Fourteen projects. Real data. Real impact."
+        kicker={t("Chapter Three")}
+        title={t("Fourteen projects. Real data. Real impact.")}
       />
 
-      {/* Filter bar */}
       <div className="mb-12 flex flex-wrap gap-2">
         {projectCategories.map((cat) => {
           const isActive = filter === cat;
@@ -34,13 +35,12 @@ export function Projects() {
                   : "border-indigo/30 bg-transparent text-indigo hover:border-indigo hover:bg-indigo/5"
               }`}
             >
-              {cat}
+              {t(cat)}
             </button>
           );
         })}
       </div>
 
-      {/* Grid */}
       <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {filtered.map((p) => (
@@ -53,17 +53,16 @@ export function Projects() {
               transition={{ duration: 0.4 }}
               className="group relative flex flex-col rounded-xl border-l-4 border-transparent bg-surface p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo hover:shadow-lift"
             >
-              {/* Visual placeholder */}
               <div
                 className="relative mb-6 aspect-[16/9] overflow-hidden rounded-md"
-                style={{ background: "linear-gradient(135deg, #EEF0FF 0%, #FFF1EC 100%)" }}
+                style={{ background: "linear-gradient(135deg, var(--chip-bg) 0%, var(--chip-bg-warm) 100%)" }}
               >
                 <div className="absolute inset-0 opacity-70">
                   <svg viewBox="0 0 160 90" className="h-full w-full" aria-hidden>
                     <defs>
                       <linearGradient id={`g${p.id}`} x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#2D2BFF" stopOpacity="0.85" />
-                        <stop offset="100%" stopColor="#FF5C35" stopOpacity="0.55" />
+                        <stop offset="0%" stopColor="var(--indigo)" stopOpacity="0.85" />
+                        <stop offset="100%" stopColor="var(--coral)" stopOpacity="0.55" />
                       </linearGradient>
                     </defs>
                     <polyline
@@ -80,7 +79,7 @@ export function Projects() {
                         cx={i * 14 + 5}
                         cy={45 + Math.sin(i + p.id) * 25}
                         r="1.4"
-                        fill="#2D2BFF"
+                        fill="var(--indigo)"
                       />
                     ))}
                   </svg>
@@ -92,22 +91,22 @@ export function Projects() {
 
               <div className="font-sub mb-3 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em] text-coral">
                 {p.categories.map((c) => (
-                  <span key={c}>{c}</span>
+                  <span key={c}>{t(c)}</span>
                 ))}
               </div>
               <h3 className="font-display text-xl font-bold leading-tight text-foreground">
-                {p.title}
+                {t(p.title)}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.impact}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(p.impact)}</p>
 
               <div className="mt-4 flex flex-wrap gap-1.5">
-                {p.tech.slice(0, 5).map((t) => (
+                {p.tech.slice(0, 5).map((tech) => (
                   <span
-                    key={t}
+                    key={tech}
                     className="font-mono rounded-sm px-2 py-0.5 text-[10px]"
-                    style={{ backgroundColor: "#EEF0FF", color: "var(--indigo)" }}
+                    style={{ backgroundColor: "var(--chip-bg)", color: "var(--indigo)" }}
                   >
-                    {t}
+                    {tech}
                   </span>
                 ))}
                 {p.tech.length > 5 && (
@@ -121,7 +120,7 @@ export function Projects() {
                 onClick={() => setActive(p)}
                 className="font-mono mt-6 inline-flex items-center gap-2 self-start text-[11px] uppercase tracking-[0.2em] text-indigo transition-all hover:gap-3 hover:text-coral"
               >
-                View Details <span>→</span>
+                {t("View Details")} <span>→</span>
               </button>
             </motion.article>
           ))}
@@ -134,6 +133,7 @@ export function Projects() {
 }
 
 function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  const t = useT();
   return (
     <AnimatePresence>
       {project && (
@@ -157,39 +157,39 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
               aria-label="Close"
               className="font-mono absolute right-4 top-4 rounded-sm border border-indigo/30 px-3 py-1 text-xs text-indigo transition-colors hover:border-coral hover:text-coral"
             >
-              CLOSE ✕
+              {t("CLOSE ✕")}
             </button>
             <div className="font-sub mb-3 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.25em] text-coral">
               {project.categories.map((c) => (
-                <span key={c}>{c}</span>
+                <span key={c}>{t(c)}</span>
               ))}
             </div>
             <h3 className="font-display text-2xl font-bold text-foreground md:text-4xl">
-              {project.title}
+              {t(project.title)}
             </h3>
-            <p className="mt-4 text-base leading-relaxed text-indigo">{project.impact}</p>
+            <p className="mt-4 text-base leading-relaxed text-indigo">{t(project.impact)}</p>
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground md:text-base">
-              {project.details}
+              {t(project.details)}
             </p>
             <div className="mt-8">
               <div className="font-sub mb-3 text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-                Tech Stack
+                {t("Tech Stack")}
               </div>
               <div className="flex flex-wrap gap-2">
-                {project.tech.map((t) => (
+                {project.tech.map((tech) => (
                   <span
-                    key={t}
+                    key={tech}
                     className="font-mono rounded-sm px-3 py-1 text-xs"
-                    style={{ backgroundColor: "#EEF0FF", color: "var(--indigo)" }}
+                    style={{ backgroundColor: "var(--chip-bg)", color: "var(--indigo)" }}
                   >
-                    {t}
+                    {tech}
                   </span>
                 ))}
               </div>
             </div>
             {project.duration && (
               <div className="font-mono mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                Duration · {project.duration}
+                {t("Duration")} · {project.duration}
               </div>
             )}
             {project.link && (
@@ -199,7 +199,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                 rel="noopener noreferrer"
                 className="btn-editorial mt-8"
               >
-                {project.link.label} ↗
+                {t(project.link.label)} ↗
               </a>
             )}
           </motion.div>
