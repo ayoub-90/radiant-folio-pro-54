@@ -107,6 +107,12 @@
   --ring: #6A68FF;
   --shadow-soft: 0 2px 24px -8px rgb(0 0 0 / 0.6), 0 1px 3px rgb(0 0 0 / 0.4);
   --shadow-lift: 0 12px 32px -12px rgb(106 104 255 / 0.4), 0 4px 12px rgb(0 0 0 / 0.5);
+  --alt-bg: #121212;
+  --warm-bg: #0D0D0D;
+  --ticker-bg: #1A1A1A;
+  --chip-bg: rgb(106 104 255 / 0.14);
+  --chip-bg-warm: rgb(255 119 82 / 0.10);
+  --pill-bg: #1F1F1F;
 }
 
 @layer base {
