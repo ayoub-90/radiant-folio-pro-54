@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChapterHeading } from "../ChapterHeading";
+import { useT } from "@/lib/i18n";
 
 const languages = [
   { flag: "🇲🇦", name: "Arabic", level: "Native" },
@@ -26,13 +27,14 @@ const softSkills = [
 ];
 
 export function Languages() {
+  const t = useT();
   return (
     <section
       id="languages"
       aria-labelledby="languages-heading"
       className="px-6 py-24 md:px-16 md:py-32 lg:px-24"
     >
-      <ChapterHeading number="07" kicker="Chapter Seven" title="Languages & Soft Skills" />
+      <ChapterHeading number="07" kicker={t("Chapter Seven")} title={t("Languages & Soft Skills")} />
 
       <div className="mb-16 flex flex-wrap gap-3">
         {languages.map((l, i) => (
@@ -46,9 +48,9 @@ export function Languages() {
           >
             <span className="text-2xl">{l.flag}</span>
             <div>
-              <div className="font-display text-base font-bold text-foreground">{l.name}</div>
+              <div className="font-display text-base font-bold text-foreground">{t(l.name)}</div>
               <div className="font-sub text-[10px] uppercase tracking-[0.2em] text-indigo">
-                {l.level}
+                {t(l.level)}
               </div>
             </div>
           </motion.div>
@@ -66,8 +68,8 @@ export function Languages() {
             className="rounded-xl border-l-4 border-indigo bg-surface p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
           >
             <div className="text-3xl">{s.icon}</div>
-            <h3 className="font-display mt-4 text-lg font-bold text-foreground">{s.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.quote}</p>
+            <h3 className="font-display mt-4 text-lg font-bold text-foreground">{t(s.title)}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(s.quote)}</p>
           </motion.div>
         ))}
       </div>
