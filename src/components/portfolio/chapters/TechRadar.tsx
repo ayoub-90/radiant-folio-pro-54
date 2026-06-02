@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { ChapterHeading } from "../ChapterHeading";
 import { radarZones } from "@/data/skills";
+import { useT } from "@/lib/i18n";
 
 export function TechRadar() {
+  const t = useT();
   return (
     <section
       id="stack"
       aria-labelledby="stack-heading"
       className="bg-surface px-6 py-24 md:px-16 md:py-32 lg:px-24"
     >
-      <ChapterHeading number="06" kicker="Chapter Six" title="Tools & Stack" />
+      <ChapterHeading number="06" kicker={t("Chapter Six")} title={t("Tools & Stack")} />
 
       <div className="mx-auto max-w-5xl space-y-10">
         {radarZones.map((zone, zi) => (
@@ -25,7 +27,7 @@ export function TechRadar() {
               className="font-sub mb-4 text-[11px] uppercase tracking-[0.3em]"
               style={{ color: zi < 2 ? "var(--indigo)" : "var(--coral)" }}
             >
-              {zone.level}
+              {t(zone.level)}
             </div>
             <div className="flex flex-wrap gap-x-6 gap-y-3">
               {zone.skills.map((s) => (
