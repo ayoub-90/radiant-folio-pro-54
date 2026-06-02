@@ -3,25 +3,27 @@ import { motion } from "framer-motion";
 import { z } from "zod";
 import { ChapterHeading } from "../ChapterHeading";
 import { UPWORK_URL, LINKEDIN_URL, RESUME_URL } from "@/data/projects";
+import { useT } from "@/lib/i18n";
 
 const EMAIL = "elharemayoub1@gmail.com";
 const PHONE = "+212 661 731 716";
 
-const schema = z.object({
-  name: z.string().trim().min(1, "Name required").max(100),
-  email: z.string().trim().email("Invalid email").max(255),
-  message: z.string().trim().min(5, "Tell me a bit more").max(2000),
-});
-
 const contacts = [
-  { icon: "📧", label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-  { icon: "💼", label: "Upwork", value: "View profile", href: UPWORK_URL, external: true },
-  { icon: "🔗", label: "LinkedIn", value: "ayoub-elharem", href: LINKEDIN_URL, external: true },
-  { icon: "📱", label: "Phone", value: PHONE, href: `tel:${PHONE.replace(/\s/g, "")}` },
-  { icon: "📄", label: "Resume", value: "Download PDF", href: RESUME_URL, download: true },
+  { icon: "📧", label: "Email", value: EMAIL, href: `mailto:${EMAIL}`, translate: false },
+  { icon: "💼", label: "Upwork", value: "View profile", href: UPWORK_URL, external: true, translate: true },
+  { icon: "🔗", label: "LinkedIn", value: "ayoub-elharem", href: LINKEDIN_URL, external: true, translate: false },
+  { icon: "📱", label: "Phone", value: PHONE, href: `tel:${PHONE.replace(/\s/g, "")}`, translate: false },
+  { icon: "📄", label: "Resume", value: "Download PDF", href: RESUME_URL, download: true, translate: true },
 ];
 
 export function Contact() {
+  const t = useT();
+  const schema = z.object({
+    name: z.string().trim().min(1, t("Name required")).max(100),
+    email: z.string().trim().email(t("Invalid email")).max(255),
+    message: z.string().trim().min(5, t("Tell me a bit more")).max(2000),
+  });
+
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
@@ -48,22 +50,21 @@ export function Contact() {
       aria-labelledby="contact-heading"
       className="dark-section relative overflow-hidden px-6 py-32 md:px-16 lg:px-24"
     >
-      {/* Aurora background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
           className="animate-aurora absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full opacity-40 blur-3xl"
-          style={{ background: "radial-gradient(circle, #2D2BFF, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, var(--indigo), transparent 70%)" }}
         />
         <div
           className="animate-aurora absolute -right-32 bottom-0 h-[520px] w-[520px] rounded-full opacity-35 blur-3xl"
           style={{
-            background: "radial-gradient(circle, #FF5C35, transparent 70%)",
+            background: "radial-gradient(circle, var(--coral), transparent 70%)",
             animationDelay: "-6s",
           }}
         />
       </div>
 
-      <ChapterHeading number="08" kicker="Chapter Eight" title="Let's build something that actually works." />
+      <ChapterHeading number="08" kicker={t("Chapter Eight")} title={t("Let's build something that actually works.")} />
 
       <motion.p
         initial={{ opacity: 0, y: 16 }}
@@ -72,8 +73,8 @@ export function Contact() {
         transition={{ duration: 0.7 }}
         className="mb-16 max-w-3xl text-lg leading-relaxed text-foreground/85 md:text-xl"
       >
-        Open to freelance projects, full-time roles, and data consulting missions. Remote-first.{" "}
-        <span className="text-indigo font-semibold">Available now.</span>
+        {t("Open to freelance projects, full-time roles, and data consulting missions. Remote-first.")}{" "}
+        <span className="text-indigo font-semibold">{t("Available now.")}</span>
       </motion.p>
 
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
@@ -89,14 +90,17 @@ export function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group flex items-center gap-5 rounded-md border border-white/10 bg-surface p-5 transition-all hover:border-indigo hover:bg-surface-elevated hover:glow-teal"
+              className="group flex items-center gap-5 rounded-md border bg-surface p-5 transition-all hover:border-indigo hover:bg-surface-elevated hover:glow-teal"
+              style={{ borderColor: "var(--border)" }}
             >
               <span className="text-2xl">{c.icon}</span>
               <div className="flex-1">
                 <div className="font-sub text-[10px] uppercase tracking-[0.3em] text-coral">
-                  {c.label}
+                  {t(c.label)}
                 </div>
-                <div className="font-display mt-1 text-base text-foreground">{c.value}</div>
+                <div className="font-display mt-1 text-base text-foreground">
+                  {c.translate ? t(c.value) : c.value}
+                </div>
               </div>
               <span className="font-mono text-indigo opacity-0 transition-opacity group-hover:opacity-100">
                 →
@@ -111,41 +115,45 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="rounded-md border border-white/10 bg-surface p-8"
+          className="rounded-md border bg-surface p-8"
+          style={{ borderColor: "var(--border)" }}
         >
           <div className="font-sub mb-6 text-[10px] uppercase tracking-[0.3em] text-indigo">
-            ▸ Send a message
+            {t("▸ Send a message")}
           </div>
           <div className="space-y-5">
             <Field
-              label="Name"
+              label={t("Name")}
               value={form.name}
               onChange={(v) => setForm({ ...form, name: v })}
               error={errors.name}
             />
             <Field
-              label="Email"
+              label={t("Email")}
               type="email"
               value={form.email}
               onChange={(v) => setForm({ ...form, email: v })}
               error={errors.email}
             />
             <Field
-              label="Message"
+              label={t("Message")}
               textarea
               value={form.message}
               onChange={(v) => setForm({ ...form, message: v })}
               error={errors.message}
             />
             <button type="submit" className="btn-editorial w-full justify-center">
-              {sent ? "✓ Opened in your mail client" : "Send Message →"}
+              {sent ? t("✓ Opened in your mail client") : t("Send Message →")}
             </button>
           </div>
         </motion.form>
       </div>
 
-      <div className="font-mono mt-24 border-t border-white/10 pt-8 text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-        © 2026 Ayoub Elharem · Casablanca, Morocco · Built with intent.
+      <div
+        className="font-mono mt-24 border-t pt-8 text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
+        style={{ borderColor: "var(--border)" }}
+      >
+        {t("© 2026 Ayoub Elharem · Casablanca, Morocco · Built with intent.")}
       </div>
     </section>
   );
@@ -167,7 +175,7 @@ function Field({
   error?: string;
 }) {
   const cls =
-    "w-full rounded-sm border border-white/15 bg-background/60 px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-indigo focus:outline-none focus:ring-1 focus:ring-indigo";
+    "w-full rounded-sm border bg-background/60 px-4 py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-indigo focus:outline-none focus:ring-1 focus:ring-indigo";
   return (
     <label className="block">
       <span className="font-sub mb-2 block text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -179,6 +187,7 @@ function Field({
           onChange={(e) => onChange(e.target.value)}
           rows={5}
           className={cls}
+          style={{ borderColor: "var(--input)" }}
           maxLength={2000}
         />
       ) : (
@@ -187,6 +196,7 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={cls}
+          style={{ borderColor: "var(--input)" }}
           maxLength={255}
         />
       )}
