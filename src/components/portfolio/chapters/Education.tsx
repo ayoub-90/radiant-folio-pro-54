@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChapterHeading } from "../ChapterHeading";
+import { useT } from "@/lib/i18n";
 
 const certs = [
   { name: "Bootcamp Data Analyst", org: "Simplon Maghreb", status: "done" as const },
@@ -9,13 +10,14 @@ const certs = [
 ];
 
 export function Education() {
+  const t = useT();
   return (
     <section
       id="education"
       aria-labelledby="education-heading"
       className="px-6 py-24 md:px-16 md:py-32 lg:px-24"
     >
-      <ChapterHeading number="05" kicker="Chapter Five" title="Certifications & Education" />
+      <ChapterHeading number="05" kicker={t("Chapter Five")} title={t("Certifications & Education")} />
 
       <div className="grid gap-10 lg:grid-cols-2">
         <motion.div
@@ -26,18 +28,18 @@ export function Education() {
           className="rounded-xl border-l-4 border-coral bg-surface p-8 shadow-soft"
         >
           <div className="font-sub mb-4 text-[10px] uppercase tracking-[0.3em] text-coral">
-            🎓 Education
+            {t("🎓 Education")}
           </div>
           <h3 className="font-display text-2xl font-bold text-foreground md:text-3xl">
-            Engineer's Degree — Big Data & Artificial Intelligence
+            {t("Engineer's Degree — Big Data & Artificial Intelligence")}
           </h3>
-          <div className="font-mono mt-3 text-sm text-indigo">ISGA Rabat · 2022 – 2025</div>
+          <div className="font-mono mt-3 text-sm text-indigo">{t("ISGA Rabat · 2022 – 2025")}</div>
           <div className="mt-6 flex flex-wrap gap-2">
             {["Machine Learning", "Deep Learning", "NLP", "Data Warehouse", "ETL", "Hadoop", "Spark"].map((s) => (
               <span
                 key={s}
                 className="font-mono rounded-sm px-3 py-1 text-xs"
-                style={{ backgroundColor: "#EEF0FF", color: "var(--indigo)" }}
+                style={{ backgroundColor: "var(--chip-bg)", color: "var(--indigo)" }}
               >
                 {s}
               </span>
@@ -63,9 +65,9 @@ export function Education() {
                     className="font-sub text-[10px] uppercase tracking-[0.3em]"
                     style={{ color: c.status === "done" ? "var(--indigo)" : "var(--coral)" }}
                   >
-                    {c.status === "done" ? "✓ Certified" : "⏳ In Progress"}
+                    {c.status === "done" ? t("✓ Certified") : t("⏳ In Progress")}
                   </div>
-                  <h4 className="font-display mt-2 text-lg font-bold text-foreground">{c.name}</h4>
+                  <h4 className="font-display mt-2 text-lg font-bold text-foreground">{t(c.name)}</h4>
                   <div className="font-mono mt-1 text-xs text-muted-foreground">{c.org}</div>
                 </div>
                 <div
