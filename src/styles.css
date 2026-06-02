@@ -73,6 +73,36 @@
   --shadow-lift: 0 12px 32px -12px rgb(45 43 255 / 0.18), 0 4px 12px rgb(26 26 26 / 0.06);
 }
 
+.dark {
+  --background: #0D0D0D;
+  --foreground: #F5F2EC;
+  --surface: #161616;
+  --surface-elevated: #1F1F1F;
+  --card: #161616;
+  --card-foreground: #F5F2EC;
+  --popover: #1F1F1F;
+  --popover-foreground: #F5F2EC;
+  --primary: #6A68FF;
+  --primary-foreground: #0D0D0D;
+  --secondary: #1A1A2E;
+  --secondary-foreground: #F5F2EC;
+  --muted: #1C1C1C;
+  --muted-foreground: #A8A8A8;
+  --accent: #FF7752;
+  --accent-foreground: #0D0D0D;
+  --indigo: #6A68FF;
+  --coral: #FF7752;
+  --teal: #6A68FF;
+  --amber: #FF7752;
+  --destructive: oklch(0.7 0.22 27);
+  --destructive-foreground: #0D0D0D;
+  --border: rgb(245 242 236 / 0.10);
+  --input: rgb(245 242 236 / 0.16);
+  --ring: #6A68FF;
+  --shadow-soft: 0 2px 24px -8px rgb(0 0 0 / 0.6), 0 1px 3px rgb(0 0 0 / 0.4);
+  --shadow-lift: 0 12px 32px -12px rgb(106 104 255 / 0.4), 0 4px 12px rgb(0 0 0 / 0.5);
+}
+
 @layer base {
   * { border-color: var(--color-border); }
 
@@ -85,6 +115,10 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  .dark body {
+    background-image: radial-gradient(circle, rgb(245 242 236 / 0.06) 1px, transparent 1px);
   }
 
   ::selection {
