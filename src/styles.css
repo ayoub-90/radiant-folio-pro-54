@@ -71,6 +71,12 @@
   --ring: #2D2BFF;
   --shadow-soft: 0 2px 24px -8px rgb(26 26 26 / 0.08), 0 1px 3px rgb(26 26 26 / 0.04);
   --shadow-lift: 0 12px 32px -12px rgb(45 43 255 / 0.18), 0 4px 12px rgb(26 26 26 / 0.06);
+  --alt-bg: #FAF8F3;
+  --warm-bg: #F5F2EC;
+  --ticker-bg: #EEEBE4;
+  --chip-bg: #EEF0FF;
+  --chip-bg-warm: #FFF1EC;
+  --pill-bg: #FFFFFF;
 }
 
 .dark {
