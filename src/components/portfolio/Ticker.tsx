@@ -5,7 +5,7 @@ export function Ticker() {
   return (
     <div
       className="relative w-full overflow-hidden border-y py-4"
-      style={{ backgroundColor: "#EEEBE4", borderColor: "var(--border)" }}
+      style={{ backgroundColor: "var(--ticker-bg)", borderColor: "var(--border)" }}
     >
       <div className="ticker-track flex w-max gap-10 whitespace-nowrap">
         {items.map((s, i) => (
