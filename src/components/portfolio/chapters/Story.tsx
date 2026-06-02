@@ -62,13 +62,13 @@ export function Story() {
     <section id="story" aria-labelledby="story-heading" className="px-6 py-24 md:px-16 md:py-32 lg:px-24">
       <ChapterHeading number="01" kicker={t("Chapter One")} title={t("Who I Am")} />
 
-      <div className="grid gap-12 lg:grid-cols-[400px_1fr] lg:gap-20">
+      <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative aspect-square w-full max-w-[400px] self-start text-foreground"
+          className="relative aspect-square w-full max-w-[320px] shrink-0 text-foreground md:max-w-[380px]"
         >
           <div className="absolute inset-0 rounded-full bg-indigo/10 blur-3xl" />
           <div className="relative">
