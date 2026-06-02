@@ -3,14 +3,23 @@
 export const fr: Record<string, string> = {
   // Hero
   "I turn raw data into decisions that matter.": "Je transforme les données brutes en décisions qui comptent.",
+  "I turn raw": "Je transforme les",
+  "data": "données",
+  "into decisions that": "brutes en décisions qui",
+  "matter.": "comptent.",
   "Portfolio · 2026": "Portfolio · 2026",
   "Data Scientist & Analyst · Machine Learning · BI & Visualization · Casablanca, Morocco":
     "Data Scientist & Analyste · Machine Learning · BI & Visualisation · Casablanca, Maroc",
+  "Data Scientist & Analyst": "Data Scientist & Analyste",
+  "Machine Learning": "Machine Learning",
+  "BI & Visualization": "BI & Visualisation",
+  "Casablanca, Morocco": "Casablanca, Maroc",
   "Explore My Work": "Voir mes projets",
   "Hire Me on Upwork": "Recrutez-moi sur Upwork",
   "Download Resume": "Télécharger le CV",
-  "Scroll ↓": "Faire défiler ↓",
+  "Scroll ↓": "Défiler ↓",
   "9 chapters": "9 chapitres",
+  "Chapters": "Chapitres",
 
   // Chapter kickers / numbers labels
   "Chapter One": "Chapitre Un",
@@ -63,7 +72,6 @@ export const fr: Record<string, string> = {
     "Quatorze projets. Données réelles. Impact réel.",
   "All": "Tous",
   "Business Intelligence": "Business Intelligence",
-  "Machine Learning": "Machine Learning",
   "Real-Time & Streaming": "Temps Réel & Streaming",
   "Statistical Analysis": "Analyse Statistique",
   "View Details": "Voir les détails",
