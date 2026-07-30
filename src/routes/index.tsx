@@ -74,8 +74,6 @@ function Index() {
       <WavyDivider color="indigo" />
       <Projects />
       <WavyDivider color="coral" />
-      <Numbers />
-      <WavyDivider color="indigo" />
       <Education />
       <WavyDivider color="coral" />
       <TechRadar />

@@ -4,7 +4,6 @@ import { useT } from "@/lib/i18n";
 
 const certs = [
   { name: "Bootcamp Data Analyst", org: "Simplon Maghreb", status: "done" as const },
-  { name: "Bootcamp Data Science", org: "Simplon Maghreb", status: "done" as const },
   { name: "AWS Cloud Practitioner Essentials", org: "Amazon Web Services", status: "progress" as const },
   { name: "AWS Certified Machine Learning – Specialty", org: "Amazon Web Services", status: "progress" as const },
 ];

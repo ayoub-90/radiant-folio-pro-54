@@ -7,6 +7,7 @@ import { useT } from "@/lib/i18n";
 
 const EMAIL = "elharemayoub1@gmail.com";
 const PHONE = "+212 661 731 716";
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLQ1uVjPFHasCUhveD1qXRt2iEaLHVkNJnMeITaA71GSeKJ0ovFm8s3QUMDFUcPDrh/exec";
 
 const contacts = [
   { icon: "📧", label: "Email", value: EMAIL, href: `mailto:${EMAIL}`, translate: false },
@@ -28,8 +29,9 @@ export function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const res = schema.safeParse(form);
     if (!res.success) {
       const errs: Record<string, string> = {};
@@ -37,11 +39,29 @@ export function Contact() {
       setErrors(errs);
       return;
     }
+
     setErrors({});
-    const body = encodeURIComponent(`${res.data.message}\n\n— ${res.data.name} (${res.data.email})`);
-    const subject = encodeURIComponent(`Portfolio inquiry from ${res.data.name}`);
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setSent(false);
+
+    try {
+      await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }).toString(),
+        mode: "no-cors",
+      });
+
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      alert("Unable to send your message right now. Please try again later.");
+    }
   };
 
   return (
@@ -143,7 +163,7 @@ export function Contact() {
               error={errors.message}
             />
             <button type="submit" className="btn-editorial w-full justify-center">
-              {sent ? t("✓ Opened in your mail client") : t("Send Message →")}
+              {sent ? t("✓ Message sent") : t("Send Message →")}
             </button>
           </div>
         </motion.form>

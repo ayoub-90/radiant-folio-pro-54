@@ -4,55 +4,49 @@ import { skillClusters } from "@/data/skills";
 import { useT } from "@/lib/i18n";
 
 const PARAGRAPH_KEYS = [
-  "I'm Ayoub — a Big Data & AI engineer turned Data Scientist and Analyst. I graduated from ISGA Rabat with a degree in Big Data & Artificial Intelligence, and I've spent the last 3 years turning messy data into systems that think, dashboards that speak, and models that predict.",
-  "At OCP Group — one of Africa's largest industrial companies — I ran exploratory data analysis, supported business teams with reporting, and validated data quality at scale. At ISICOD, I built recommendation systems from scratch, trained LSTM models that improved forecast accuracy by 12%, and implemented NLP semantic search pipelines with +30% ETL performance gains.",
-  "I work across the full data stack: from raw CSVs to cloud-native pipelines, from Star Schema design to real-time streaming with Kafka, from interactive Power BI dashboards to production ML models. Remote-ready. Detail-obsessed. Impact-driven.",
+  "I'm Ayoub, a Big Data & AI Engineer with a Data Science and Analytics edge. I hold an engineering degree in Big Data & AI from ISGA Rabat, and over the past few years I've built systems that turn raw, messy data into clear decisions from real-time pipelines to predictive models to dashboards executives actually read.\n\n At OCP Group, one of Africa's largest industrial companies, I worked with real-time IoT data, driving reporting and quality processes at scale. At ISICOD, I designed hybrid recommendation systems, trained LSTM models that lifted forecast accuracy by 12%, and shipped an LLM-powered semantic search engine that cut ETL processing time by 30%.\n\nI move fluidly across the full data stack Kafka streaming, Medallion architectures, Star Schema design, cloud pipelines (AWS, Databricks, Azure), and BI storytelling in Power BI and Tableau. I care about rigor as much as impact: clean architecture, reproducible pipelines, and dashboards that tell a story at a glance.\n\nRemote-ready. Detail-obsessed. Built to ship.",
 ];
 
 function Monogram() {
   return (
-    <svg viewBox="0 0 400 400" className="h-full w-full" aria-hidden>
-      <defs>
-        <linearGradient id="hexGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--indigo)" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="var(--coral)" stopOpacity="0.6" />
-        </linearGradient>
-      </defs>
-      {[60, 100, 140, 180].map((r, i) => (
-        <polygon
-          key={i}
-          points={Array.from({ length: 6 })
-            .map((_, k) => {
-              const a = (Math.PI / 3) * k - Math.PI / 2;
-              return `${200 + r * Math.cos(a)},${200 + r * Math.sin(a)}`;
-            })
-            .join(" ")}
-          fill="none"
-          stroke="url(#hexGrad)"
-          strokeWidth={i === 0 ? 1.5 : 0.6}
-          opacity={1 - i * 0.2}
-        />
-      ))}
-      {Array.from({ length: 18 }).map((_, k) => {
-        const a = (Math.PI * 2 * k) / 18;
-        const r = 100 + (k % 3) * 40;
-        const cx = 200 + r * Math.cos(a);
-        const cy = 200 + r * Math.sin(a);
-        return <circle key={k} cx={cx} cy={cy} r={k % 4 === 0 ? 4 : 2} fill={k % 4 === 0 ? "var(--coral)" : "var(--indigo)"} />;
-      })}
-      <text
-        x="200"
-        y="218"
-        textAnchor="middle"
-        fontFamily="Clash Display, Syne, sans-serif"
-        fontWeight="700"
-        fontSize="72"
-        fill="currentColor"
-        className="text-foreground"
-      >
-        AE
-      </text>
-    </svg>
+    <div className="relative aspect-square h-full w-full">
+      <svg viewBox="0 0 400 400" className="h-full w-full" aria-hidden>
+        <defs>
+          <linearGradient id="hexGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="var(--indigo)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="var(--coral)" stopOpacity="0.6" />
+          </linearGradient>
+        </defs>
+        {[60, 100, 140, 180].map((r, i) => (
+          <polygon
+            key={i}
+            points={Array.from({ length: 6 })
+              .map((_, k) => {
+                const a = (Math.PI / 3) * k - Math.PI / 2;
+                return `${200 + r * Math.cos(a)},${200 + r * Math.sin(a)}`;
+              })
+              .join(" ")}
+            fill="none"
+            stroke="url(#hexGrad)"
+            strokeWidth={i === 0 ? 1.5 : 0.6}
+            opacity={1 - i * 0.2}
+          />
+        ))}
+        {Array.from({ length: 18 }).map((_, k) => {
+          const a = (Math.PI * 2 * k) / 18;
+          const r = 100 + (k % 3) * 40;
+          const cx = 200 + r * Math.cos(a);
+          const cy = 200 + r * Math.sin(a);
+          return <circle key={k} cx={cx} cy={cy} r={k % 4 === 0 ? 4 : 2} fill={k % 4 === 0 ? "var(--coral)" : "var(--indigo)"} />;
+        })}
+      </svg>
+
+      <img
+        src="/me.png"
+        alt=""
+        className="absolute inset-0 m-auto h-[72%] w-[72%] rounded-full object-cover"
+      />
+    </div>
   );
 }
 
@@ -84,7 +78,7 @@ export function Story() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.8, delay: i * 0.15 }}
-              className="text-lg leading-relaxed text-foreground md:text-xl"
+              className="whitespace-pre-line text-lg leading-relaxed text-foreground md:text-xl"
             >
               {t(p)}
             </motion.p>
